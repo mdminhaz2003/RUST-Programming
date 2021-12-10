@@ -38,7 +38,11 @@ fn main() {
         //* trim() function remove all weate space from string variable 
         //* parse() function can do string type variable to integer type variable
         //* expect() function can handle error to convert string type variable to integer type
-        let guess: u32 = guess.trim().parse().expect("Invalid guess !! Please try again !");
+        let guess: u32 = match guess.trim().parse(){
+            //* Switching from an expect call to a match expression is one way of moving from crashing on an error to handling the error 
+            Ok(number) => number,
+            Err(_) => continue,
+        };
 
         //* Compareing value which is input a user and genarated by random 
         match guess.cmp(&random_number) {
