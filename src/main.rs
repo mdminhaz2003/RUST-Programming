@@ -42,9 +42,13 @@ fn main() {
 
         //* Compareing value which is input a user and genarated by random 
         match guess.cmp(&random_number) {
-            Ordering::Equal => println!("Congrats ! Number Matched."),
             Ordering::Greater => println!("Your number is too big."),
-            Ordering::Less => println!("Your number is too smalll.")
+            Ordering::Less => println!("Your number is too smalll."),
+            //* this break statement will exicute after random number is equal to user input number and this program will end. 
+            Ordering::Equal => {
+                println!("Congrats ! Your number is same as the random number.");
+                break;
+            }
         }
     }
 
