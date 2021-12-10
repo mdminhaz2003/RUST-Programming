@@ -1,3 +1,12 @@
+/**========================================================================
+ * ?                                ABOUT
+ * @author         :  Md. Minhaz
+ * @email          :  mdm047767@gmail.com
+ * @repo           :  https://github.com/mdminhaz2003/RUST-Programming/
+ * @createdOn      :  10 December, 2021 at 11:00:00 AM
+ * @description    :  This project can receive an user input from console and compare with a random number and print a result it such as Guessing Game.
+ *========================================================================**/
+
 //* Lib Section 
 use rand::Rng;
 use std::io;
