@@ -1,0 +1,110 @@
+{
+  "aggs": {
+    "2": {
+      "terms": {
+        "field": "calling",
+        "order": {
+          "_count": "desc"
+        },
+        "size": 5000
+      }
+    }
+  },
+  "size": 0,
+  "fields": [
+    {
+      "field": "@timestamp",
+      "format": "date_time"
+    },
+    {
+      "field": "info.timestamp",
+      "format": "date_time"
+    }
+  ],
+  "script_fields": {},
+  "stored_fields": [
+    "*"
+  ],
+  "runtime_mappings": {},
+  "_source": {
+    "excludes": []
+  },
+  "query": {
+    "bool": {
+      "must": [],
+      "filter": [
+        {
+          "bool": {
+            "filter": [
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "match": {
+                        "direction": "inbound"
+                      }
+                    }
+                  ],
+                  "minimum_should_match": 1
+                }
+              },
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "bool": {
+                        "should": [
+                          {
+                            "match": {
+                              "Acct-Status-Type": "Stop"
+                            }
+                          }
+                        ],
+                        "minimum_should_match": 1
+                      }
+                    },
+                    {
+                      "bool": {
+                        "should": [
+                          {
+                            "match": {
+                              "Sonus-Final-ATTEMPT-Indicator-Field": "1"
+                            }
+                          }
+                        ],
+                        "minimum_should_match": 1
+                      }
+                    }
+                  ],
+                  "minimum_should_match": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "match_phrase": {
+            "dst_company_name": "Technology One"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "format": "strict_date_optional_time",
+              "gte": "2022-03-07T00:00:00.000Z",
+              "lte": "2022-03-07T23:59:59.000Z"
+            }
+          }
+        }
+      ],
+      "should": [],
+      "must_not": [
+        {
+          "match_phrase": {
+            "calling": ""
+          }
+        }
+      ]
+    }
+  }
+}
